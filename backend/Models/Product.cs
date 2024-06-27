@@ -7,6 +7,7 @@ namespace backend.Models
         public string Description { get; set; }
         public double Price { get; set; }
         public string ImageUrl { get; set; }
+        public int ViewCount { get; set; }
         public List<Review> Reviews { get; set; }
     }
 }
