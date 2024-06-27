@@ -15,16 +15,15 @@ namespace backend.Repositories
 
         public async Task<IEnumerable<Review>> GetReviewsByProductIdAsync(int productId)
         {
-            return await _context.Reviews.Where(r => r.ProductId == productId).Include(r => r.User).ToListAsync();
+            return await _context.Reviews
+                                 .Where(r => r.ProductId == productId)
+                                 .Include(r => r.User)
+                                 .ToListAsync();
         }
 
-        public async Task<Review> GetReviewByIdAsync(int id)
+        public async Task AddReviewAsync(int productId, Review review)
         {
-            return await _context.Reviews.FindAsync(id);
-        }
-
-        public async Task AddReviewAsync(Review review)
-        {
+            review.ProductId = productId;
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
         }
