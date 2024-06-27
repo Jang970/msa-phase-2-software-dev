@@ -23,6 +23,11 @@ namespace backend.Repositories
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
         public async Task AddUserAsync(User user)
         {
             _context.Users.Add(user);
@@ -45,9 +50,14 @@ namespace backend.Repositories
             }
         }
 
-        public async Task<bool> UserExistsAsync(int id)
+        public async Task<bool> UserExistsAsync(string email)
         {
-            return await _context.Users.AnyAsync(e => e.Id == id);
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
+
+        public async Task<IEnumerable<Order>> GetUserOrdersAsync(int userId)
+        {
+            return await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
         }
     }
 }

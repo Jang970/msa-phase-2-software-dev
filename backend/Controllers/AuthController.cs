@@ -19,7 +19,7 @@ namespace backend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
-            if (await _userRepository.UserExistsAsync(user.Id))
+            if (await _userRepository.UserExistsAsync(user.Email))
             {
                 return BadRequest("user already exists.");
             }
@@ -32,7 +32,8 @@ namespace backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] User user)
         {
-            var userFromDb = await _userRepository.GetUserByIdAsync(user.Id);
+            // todo: add a login model for email and password for further encapsulation
+            var userFromDb = await _userRepository.GetUserByEmailAsync(user.Email);
 
             if (userFromDb == null || userFromDb.PasswordHash != user.PasswordHash)
             {
