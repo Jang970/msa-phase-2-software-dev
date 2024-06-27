@@ -18,21 +18,42 @@ namespace backend.Repositories
             return await _context.Carts.Include(c => c.CartItems).ThenInclude(ci => ci.Product).FirstOrDefaultAsync(c => c.UserId == userId);
         }
 
-        public async Task AddCartItemAsync(CartItem cartItem)
+        public async Task AddCartItemAsync(int userId, CartItem cartItem)
         {
+            var cart = await GetCartByUserIdAsync(userId);
+            if (cart == null)
+            {
+                cart = new Cart { UserId = userId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            cartItem.CartId = cart.Id;
             _context.CartItems.Add(cartItem);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateCartItemAsync(CartItem cartItem)
+        public async Task UpdateCartItemAsync(int userId, CartItem cartItem)
         {
+            var cart = await GetCartByUserIdAsync(userId);
+            if (cart == null || cart.Id != cartItem.CartId)
+            {
+                throw new KeyNotFoundException("Cart not found.");
+            }
+
             _context.Entry(cartItem).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCartItemAsync(int cartItemId)
+        public async Task DeleteCartItemAsync(int userId, int cartItemId)
         {
-            var cartItem = await _context.CartItems.FindAsync(cartItemId);
+            var cart = await GetCartByUserIdAsync(userId);
+            if (cart == null)
+            {
+                throw new KeyNotFoundException("Cart not found.");
+            }
+
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.Id == cartItemId);
             if (cartItem != null)
             {
                 _context.CartItems.Remove(cartItem);
