@@ -1,11 +1,27 @@
+using backend.Data;
 using backend.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
+// configure db context
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseInMemoryDatabase("ECommerceWebsite"));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDBContext>(options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string not found"));
+    });
+}
+
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
