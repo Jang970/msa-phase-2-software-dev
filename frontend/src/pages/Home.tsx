@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 const Home: React.FC = () => {
   return (
     <Box>
-      <Typography variant="h1">Welcome to the Landing Page</Typography>
+      <Typography variant="h1">Welcome to the Hooome Page</Typography>
     </Box>
   );
 };
