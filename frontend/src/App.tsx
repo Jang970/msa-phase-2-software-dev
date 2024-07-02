@@ -9,6 +9,7 @@ import Shirts from "./pages/Shirts";
 import Pants from "./pages/Pants";
 import Jackets from "./pages/Jackets";
 import Hats from "./pages/Hats";
+import Register from "./pages/Register";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/shirts" element={<Shirts />} />
         <Route path="/pants" element={<Pants />} />

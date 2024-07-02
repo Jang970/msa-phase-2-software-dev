@@ -1,4 +1,5 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 //todo: this will contain the sign up and login components
 const Landing: React.FC = () => {
@@ -9,12 +10,17 @@ const Landing: React.FC = () => {
         <TextField label="Email" size="small" type="email" required />
         <TextField label="Password" size="small" type="password" required />
         <Stack direction="row" gap={2}>
-          <Button variant="contained" fullWidth>
+          <Button variant="contained" sx={{ width: "50%" }}>
             Sign In
           </Button>
-          <Button variant="contained" fullWidth>
-            Register
-          </Button>
+          <Link to="/register" style={{ width: "50%" }}>
+            <Button variant="contained" fullWidth>
+              Register
+            </Button>
+          </Link>
+          {
+            // add error text here
+          }
         </Stack>
       </Stack>
     </Stack>

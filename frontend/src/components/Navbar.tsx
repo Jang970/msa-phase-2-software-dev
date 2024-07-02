@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const categories = ["shirts", "pants", "jackets", "hats"];
 
-  if (location.pathname === "/") return null;
+  if (location.pathname === "/" || "/register") return null;
 
   return (
     <Stack
