@@ -1,10 +1,19 @@
-import { Box, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import ProductList from "../components/ProductList";
 
 const Home: React.FC = () => {
   return (
-    <Box>
-      <Typography variant="h1">Welcome to the Hooome Page</Typography>
-    </Box>
+    <Stack
+      direction="column"
+      width="100%"
+      height="100%"
+      alignItems="center"
+      gap={2}
+      pb={2}
+      pt={2}
+    >
+      <ProductList />
+    </Stack>
   );
 };
 
