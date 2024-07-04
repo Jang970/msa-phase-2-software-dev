@@ -27,7 +27,8 @@ const Navbar: React.FC = () => {
       justifyContent="space-around"
       alignItems="center"
       bgcolor="tomato"
-      p={2}
+      width="100%"
+      py={1}
     >
       <Link href="/home">Home</Link>
       {categories.map((category) => (
@@ -56,11 +57,11 @@ const Navbar: React.FC = () => {
         }}
       />
       <Link href="/profile">
-        <AccountCircleIcon sx={{ width: 35, height: 35 }} />
+        <AccountCircleIcon sx={{ width: 30, height: 30 }} />
       </Link>
       <Link href="/cart">
         <Badge badgeContent={0} color="secondary" showZero>
-          <ShoppingCartIcon sx={{ width: 35, height: 35 }} />
+          <ShoppingCartIcon sx={{ width: 30, height: 30 }} />
         </Badge>
       </Link>
     </Stack>
