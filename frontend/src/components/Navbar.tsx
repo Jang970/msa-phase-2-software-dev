@@ -2,20 +2,28 @@ import {
   Autocomplete,
   Badge,
   Box,
+  IconButton,
   Link,
   Stack,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useLocation } from "react-router-dom";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
+import { ColourModeContext } from "../App";
+import { useContext } from "react";
 
 //todo: add links to shirts, pants, jackets, hats products
 //todo: search bar
 const Navbar: React.FC = () => {
   const location = useLocation();
   const categories = ["shirts", "pants", "jackets", "hats"];
+
+  const theme = useTheme();
+  const colourMode = useContext(ColourModeContext);
 
   if (location.pathname === "/" || location.pathname === "/register")
     return null;
@@ -56,6 +64,11 @@ const Navbar: React.FC = () => {
           "& fieldset": { borderRadius: "1rem" },
         }}
       />
+
+      <IconButton onClick={colourMode.toggleColourMode}>
+        {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+      </IconButton>
+
       <Link href="/profile">
         <AccountCircleIcon sx={{ width: 30, height: 30 }} />
       </Link>
