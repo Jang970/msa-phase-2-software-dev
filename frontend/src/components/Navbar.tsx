@@ -1,17 +1,17 @@
 import {
+  AppBar,
   Autocomplete,
   Badge,
   Box,
   IconButton,
   Link,
-  Stack,
   TextField,
-  Typography,
+  Toolbar,
   useTheme,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { ColourModeContext } from "../App";
 import { useContext } from "react";
@@ -20,6 +20,7 @@ import { useContext } from "react";
 //todo: search bar
 const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const categories = ["shirts", "pants", "jackets", "hats"];
 
   const theme = useTheme();
@@ -28,56 +29,68 @@ const Navbar: React.FC = () => {
   if (location.pathname === "/" || location.pathname === "/register")
     return null;
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   return (
-    <Stack
-      direction="row"
-      gap={2}
-      justifyContent="space-around"
-      alignItems="center"
-      bgcolor="tomato"
-      width="100%"
-      py={1}
-    >
-      <Link href="/home">Home</Link>
-      {categories.map((category) => (
-        <Box key={category}>
-          <Link href={`/${category}`}>
-            {category.charAt(0).toUpperCase() + category.slice(1)}
+    <AppBar position="static" color="secondary">
+      <Toolbar>
+        <Box
+          sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 5 }}
+        >
+          <Link href="/home" underline="none" color="inherit">
+            Home
           </Link>
+          {categories.map((category) => (
+            <Link
+              key={category}
+              href={`/${category}`}
+              underline="none"
+              color="inherit"
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </Link>
+          ))}
         </Box>
-      ))}
-      <Autocomplete
-        freeSolo
-        size="small"
-        options={["shirts", "pants", "jackets", "hats"]} // this will be all the products in the database
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search"
-            variant="outlined"
-            InputProps={{ ...params.InputProps, type: "search" }}
+        <Box flexGrow={1}>
+          <Autocomplete
+            freeSolo
+            size="small"
+            options={categories}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search"
+                variant="outlined"
+                InputProps={{ ...params.InputProps, type: "search" }}
+                sx={{
+                  "& fieldset": { borderRadius: "1rem" },
+                  marginRight: 2,
+                }}
+              />
+            )}
           />
-        )}
-        sx={{
-          flexGrow: 1,
-          maxWidth: "40rem",
-          "& fieldset": { borderRadius: "1rem" },
-        }}
-      />
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: 2 }}>
+          <IconButton onClick={colourMode.toggleColourMode} color="inherit">
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={() => handleNavigation("/profile")}
+          >
+            <AccountCircleIcon />
+          </IconButton>
 
-      <IconButton onClick={colourMode.toggleColourMode}>
-        {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
-      </IconButton>
-
-      <Link href="/profile">
-        <AccountCircleIcon sx={{ width: 30, height: 30 }} />
-      </Link>
-      <Link href="/cart">
-        <Badge badgeContent={0} color="secondary" showZero>
-          <ShoppingCartIcon sx={{ width: 30, height: 30 }} />
-        </Badge>
-      </Link>
-    </Stack>
+          <IconButton color="inherit" onClick={() => handleNavigation("/cart")}>
+            <Badge badgeContent={0} color="secondary" showZero>
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 
