@@ -41,6 +41,17 @@ const ProductTable: React.FC = () => {
           </TableCell>
           <TableCell align="center">$69.00</TableCell>
         </TableRow>
+
+        <TableRow>
+          <TableCell>
+            <Item />
+          </TableCell>
+          <TableCell align="center">$69.00</TableCell>
+          <TableCell>
+            <Quantity />
+          </TableCell>
+          <TableCell align="center">$69.00</TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );
