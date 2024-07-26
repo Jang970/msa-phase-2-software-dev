@@ -31,12 +31,6 @@ const Product: React.FC = () => {
             <Stack direction="column" gap={2} p={2}>
               <Typography variant="h4">Product Name</Typography>
               <Typography variant="h5">Price: $5</Typography>
-              <Stack direction="row" justifyContent="space-around">
-                <Box>review stars</Box>
-                <Button variant="contained" size="small">
-                  Add Your Review
-                </Button>
-              </Stack>
               <Typography variant="body1">Size: S</Typography>
               <Stack direction="column" gap={1}>
                 <Typography variant="h6">Overview</Typography>
