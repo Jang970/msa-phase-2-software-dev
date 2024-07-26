@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Cart from "./pages/Cart";
 import Product from "./pages/Product";
-import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Shirts from "./pages/Shirts";
@@ -14,6 +13,7 @@ import { createContext, useMemo, useState } from "react";
 import { darkTheme, lightTheme } from "./theme";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
+import NotFound from "./pages/NotFound";
 
 export const ColourModeContext = createContext({
   toggleColourMode: () => {},
@@ -50,8 +50,8 @@ const App: React.FC = () => {
             <Route path="/jackets" element={<Jackets />} />
             <Route path="/hats" element={<Hats />} />
             <Route path="/product" element={<Product />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </ThemeProvider>

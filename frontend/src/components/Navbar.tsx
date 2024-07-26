@@ -76,12 +76,6 @@ const Navbar: React.FC = () => {
           <IconButton onClick={colourMode.toggleColourMode} color="inherit">
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          <IconButton
-            color="inherit"
-            onClick={() => handleNavigation("/profile")}
-          >
-            <AccountCircleIcon />
-          </IconButton>
 
           <IconButton color="inherit" onClick={() => handleNavigation("/cart")}>
             <Badge badgeContent={0} color="secondary" showZero>

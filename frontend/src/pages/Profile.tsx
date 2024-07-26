@@ -1,6 +1,0 @@
-//todo: dynamic
-const Profile: React.FC = () => {
-  return <h1>Profile Page</h1>;
-};
-
-export default Profile;
