@@ -1,14 +1,41 @@
-import { BorderColor } from "@mui/icons-material";
-import { createTheme } from "@mui/material";
+import { colors, createTheme } from "@mui/material";
+import { grey, indigo } from "@mui/material/colors";
 
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
+    background: {
+      default: grey[200],
+    },
     primary: {
-      main: "#1976d2",
+      main: indigo[400],
     },
     secondary: {
       main: "#dc004e",
+    },
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "black",
+          },
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white",
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused": {
+            color: "black",
+          },
+          color: "white",
+        },
+      },
     },
   },
 });
@@ -17,10 +44,37 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#90caf9",
+      main: indigo[400],
     },
     secondary: {
       main: "#f48fb1",
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: indigo[400],
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white",
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused": {
+            color: "white",
+          },
+        },
+      },
     },
   },
 });

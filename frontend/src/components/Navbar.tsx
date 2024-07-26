@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="static" color="secondary">
+    <AppBar position="static" color="primary">
       <Toolbar>
         <Box
           sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 5 }}
