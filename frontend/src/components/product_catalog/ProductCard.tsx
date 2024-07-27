@@ -17,7 +17,7 @@ type ProductCardProps = {
 // todo: will be dynamic and accept props
 const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
   return (
-    <Card>
+    <Card sx={{ borderRadius: "0.25rem" }}>
       <CardActionArea>
         <CardMedia
           height={250}

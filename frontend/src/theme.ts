@@ -1,6 +1,41 @@
 import { createTheme } from "@mui/material";
 import { grey, indigo } from "@mui/material/colors";
 
+const generalComponentStyles = {
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+          borderColor: "white",
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "white",
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: grey[400],
+        },
+      },
+    },
+  },
+  MuiInputLabel: {
+    styleOverrides: {
+      root: {
+        "&.Mui-focused": {
+          color: "white",
+        },
+        color: "white",
+      },
+    },
+  },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: "1rem",
+      },
+    },
+  },
+};
+
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -15,31 +50,7 @@ export const lightTheme = createTheme({
     },
   },
   components: {
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "white",
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "white",
-          },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: grey[400],
-          },
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          "&.Mui-focused": {
-            color: "white",
-          },
-          color: "white",
-        },
-      },
-    },
+    ...generalComponentStyles,
   },
 });
 
@@ -54,30 +65,13 @@ export const darkTheme = createTheme({
     },
   },
   components: {
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: indigo[400],
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "white",
-          },
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          "&.Mui-focused": {
-            color: "white",
-          },
-        },
-      },
-    },
+    // MuiAppBar: {
+    //   styleOverrides: {
+    //     root: {
+    //       backgroundColor: indigo[400],
+    //     },
+    //   },
+    // },
+    ...generalComponentStyles,
   },
 });

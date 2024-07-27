@@ -12,13 +12,12 @@ const NotFound: React.FC = () => {
   return (
     <Box
       sx={{
-        mt: 5,
+        mt: { xs: 10, md: 5 },
         display: "flex",
         flexDirection: "column",
         gap: 2,
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "100%",
       }}
     >
       <Typography variant="h1">404</Typography>

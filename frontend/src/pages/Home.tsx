@@ -10,7 +10,9 @@ const Home: React.FC = () => {
       alignItems="center"
       justifyContent="center"
       gap={2}
-      p={8}
+      px={8}
+      py={4}
+      pt={{ xs: 10, md: 4 }}
     >
       <ProductList />
     </Stack>
