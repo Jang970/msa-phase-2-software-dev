@@ -2,7 +2,7 @@ import { Card, CardContent, Box } from "@mui/material";
 import OrderSummary from "./OrderSummary";
 import ProductTable from "./ProductTable";
 
-const Cart: React.FC = () => {
+const CartCard: React.FC = () => {
   return (
     <Card sx={{ width: "80%", borderRadius: "1rem" }}>
       <CardContent sx={{ display: "flex" }}>
@@ -17,4 +17,4 @@ const Cart: React.FC = () => {
   );
 };
 
-export default Cart;
+export default CartCard;

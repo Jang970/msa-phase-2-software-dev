@@ -1,6 +1,5 @@
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
-import ProductTable from "../components/cart/ProductTable";
-import OrderSummary from "../components/cart/OrderSummary";
+import { Stack, Typography } from "@mui/material";
+import CartCard from "../components/cart/CartCard";
 
 //todo: dynamic
 const Cart: React.FC = () => {
@@ -16,7 +15,7 @@ const Cart: React.FC = () => {
       spacing={4}
     >
       <Typography variant="h3">Your Cart has {itemCount} Items</Typography>
-      <Cart />
+      <CartCard />
     </Stack>
   );
 };
