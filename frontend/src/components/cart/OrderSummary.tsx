@@ -2,7 +2,7 @@ import { Stack, Box, Typography, Divider, Button } from "@mui/material";
 
 const OrderSummary: React.FC = () => {
   return (
-    <Stack bgcolor="beige" height="100%" p={2} justifyContent="center">
+    <Stack height="100%" p={2} justifyContent="center">
       <Box
         flexGrow={1}
         sx={{ display: "flex", gap: 1, flexDirection: "column" }}

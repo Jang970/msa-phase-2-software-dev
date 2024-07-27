@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import ProductTable from "../components/cart/ProductTable";
 import OrderSummary from "../components/cart/OrderSummary";
 
@@ -11,21 +11,12 @@ const Cart: React.FC = () => {
       direction="column"
       width="100%"
       alignItems="center"
+      justifyContent="center"
       pt={2}
+      spacing={4}
     >
       <Typography variant="h3">Your Cart has {itemCount} Items</Typography>
-
-      {
-        // cart component
-      }
-      <Stack width="80%" direction="row" bgcolor="yellow" mt={2}>
-        <Box flexGrow={3}>
-          <ProductTable />
-        </Box>
-        <Box flexGrow={1}>
-          <OrderSummary />
-        </Box>
-      </Stack>
+      <Cart />
     </Stack>
   );
 };
