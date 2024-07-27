@@ -8,9 +8,9 @@ const Home: React.FC = () => {
       width="100%"
       height="100%"
       alignItems="center"
+      justifyContent="center"
       gap={2}
-      pb={2}
-      pt={4}
+      p={4}
     >
       <ProductList />
     </Stack>
