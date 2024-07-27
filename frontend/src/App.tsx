@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Landing from "./pages/Landing";
 import Cart from "./pages/Cart";
 import Product from "./pages/Product";
 import Home from "./pages/Home";
@@ -8,7 +7,6 @@ import Shirts from "./pages/Shirts";
 import Pants from "./pages/Pants";
 import Jackets from "./pages/Jackets";
 import Hats from "./pages/Hats";
-import Register from "./pages/Register";
 import { createContext, useMemo, useState } from "react";
 import { darkTheme, lightTheme } from "./theme";
 import { ThemeProvider } from "@emotion/react";
@@ -42,9 +40,7 @@ const App: React.FC = () => {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/shirts" element={<Shirts />} />
             <Route path="/pants" element={<Pants />} />
             <Route path="/jackets" element={<Jackets />} />

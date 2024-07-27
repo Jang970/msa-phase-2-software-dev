@@ -19,10 +19,13 @@ export const lightTheme = createTheme({
       styleOverrides: {
         root: {
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black",
+            borderColor: "white",
           },
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: "white",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: grey[400],
           },
         },
       },
@@ -31,7 +34,7 @@ export const lightTheme = createTheme({
       styleOverrides: {
         root: {
           "&.Mui-focused": {
-            color: "black",
+            color: "white",
           },
           color: "white",
         },

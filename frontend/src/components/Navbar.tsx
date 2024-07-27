@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { ColourModeContext } from "../App";
 import { useContext } from "react";
@@ -18,15 +18,11 @@ import { useContext } from "react";
 //todo: add links to shirts, pants, jackets, hats products
 //todo: search bar
 const Navbar: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const categories = ["shirts", "pants", "jackets", "hats"];
 
   const theme = useTheme();
   const colourMode = useContext(ColourModeContext);
-
-  if (location.pathname === "/" || location.pathname === "/register")
-    return null;
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -38,7 +34,7 @@ const Navbar: React.FC = () => {
         <Box
           sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 5 }}
         >
-          <Link href="/home" underline="none" color="inherit">
+          <Link href="/" underline="none" color="inherit">
             Home
           </Link>
           {categories.map((category) => (
