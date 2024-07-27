@@ -18,11 +18,19 @@ export const ColourModeContext = createContext({
 });
 
 const App: React.FC = () => {
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">(() => {
+    const savedMode = localStorage.getItem("themeMode");
+    return savedMode === "dark" ? "dark" : "light";
+  });
+
   const colourMode = useMemo(
     () => ({
       toggleColourMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) => {
+          const newMode = prevMode === "light" ? "dark" : "light";
+          localStorage.setItem("themeMode", newMode);
+          return newMode;
+        });
       },
     }),
     []
