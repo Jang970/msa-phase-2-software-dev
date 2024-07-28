@@ -3,7 +3,6 @@ import CartCard from "../components/cart/CartCard";
 
 //todo: dynamic
 const Cart: React.FC = () => {
-  const itemCount = 1;
   return (
     <Stack
       height="100%"
@@ -11,10 +10,10 @@ const Cart: React.FC = () => {
       width="100%"
       alignItems="center"
       justifyContent="center"
-      pt={2}
-      spacing={4}
+      spacing={1}
+      pt={{ xs: 8, md: 2 }}
     >
-      <Typography variant="h3">Your Cart has {itemCount} Items</Typography>
+      <Typography variant="h3">Your Cart</Typography>
       <CartCard />
     </Stack>
   );

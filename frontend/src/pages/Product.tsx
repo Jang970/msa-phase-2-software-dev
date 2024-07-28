@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import ProductItem from "../components/ProductItem";
+import ProductDetails from "../components/ProductDetails";
 
 const product = {
   image: "https://via.placeholder.com/300",
@@ -20,7 +20,7 @@ const Product: React.FC = () => {
       alignItems="center"
       mt={5}
     >
-      <ProductItem {...product} />
+      <ProductDetails {...product} />
     </Stack>
   );
 };

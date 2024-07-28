@@ -10,14 +10,14 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-type ProductItemProps = {
+type ProductDetailsProps = {
   name: string;
   price: string;
   image: string;
   description: string;
 };
 
-const ProductItem: React.FC<ProductItemProps> = ({
+const ProductDetails: React.FC<ProductDetailsProps> = ({
   name,
   price,
   image,
@@ -50,4 +50,4 @@ const ProductItem: React.FC<ProductItemProps> = ({
   );
 };
 
-export default ProductItem;
+export default ProductDetails;
