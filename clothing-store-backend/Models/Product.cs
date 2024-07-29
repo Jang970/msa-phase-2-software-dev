@@ -12,5 +12,7 @@ namespace clothing_store_backend.Models
         [Column(TypeName = "decimal(18, 2)")]
         public required decimal Price { get; set; }
         public int Views { get; set; }
+
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }
