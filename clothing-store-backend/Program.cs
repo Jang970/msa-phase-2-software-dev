@@ -28,6 +28,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// seed db
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<DataContext>();
+    context.Database.Migrate();  // Apply any pending migrations
+    SeedData.Initialize(context).Wait();  // Seed the database
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

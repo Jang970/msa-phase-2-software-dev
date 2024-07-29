@@ -34,7 +34,7 @@ namespace clothing_store_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("clothing_store_backend.Models.CartItem", b =>
@@ -60,7 +60,7 @@ namespace clothing_store_backend.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("clothing_store_backend.Models.Product", b =>
@@ -95,7 +95,7 @@ namespace clothing_store_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("clothing_store_backend.Models.User", b =>
@@ -116,7 +116,7 @@ namespace clothing_store_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("clothing_store_backend.Models.CartItem", b =>
