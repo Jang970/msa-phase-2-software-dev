@@ -11,8 +11,8 @@ using clothing_store_backend.Data;
 namespace clothing_store_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240729091003_NewInit")]
-    partial class NewInit
+    [Migration("20240730040646_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
