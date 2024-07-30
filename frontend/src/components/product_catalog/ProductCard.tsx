@@ -11,7 +11,7 @@ import {
 type ProductCardProps = {
   image: string;
   name: string;
-  price: string;
+  price: number;
 };
 
 // todo: will be dynamic and accept props
