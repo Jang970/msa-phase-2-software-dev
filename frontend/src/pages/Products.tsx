@@ -1,9 +1,10 @@
-import { Stack } from "@mui/material";
+import { Alert, Stack } from "@mui/material";
 import ProductDetails from "../components/ProductDetails";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../models/product";
 import { getProductById } from "../services/productServices";
+import Error from "../components/Error";
 
 // const product = {
 //   image: "https://via.placeholder.com/300",
@@ -18,7 +19,7 @@ const Products: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -26,8 +27,7 @@ const Products: React.FC = () => {
         const data = await getProductById(Number(id));
         setProduct(data);
       } catch (err) {
-        setError("An error occurred");
-        console.log(error, err);
+        setError("Error fetching product.");
       } finally {
         setLoading(false);
       }
@@ -49,6 +49,7 @@ const Products: React.FC = () => {
       alignItems="center"
       mt={5}
     >
+      {error && <Error text={error} />}
       {product && <ProductDetails {...product} />}
     </Stack>
   );

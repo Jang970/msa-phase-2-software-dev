@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { indigo, grey } from "@mui/material/colors";
+import { useUserStore } from "../../stores/userStore";
 
 type LandingButtonsProps = {
   text: string;
@@ -7,6 +8,7 @@ type LandingButtonsProps = {
 };
 
 const LandingButtons: React.FC<LandingButtonsProps> = ({ text, onClick }) => {
+  const loading = useUserStore((state) => state.loading);
   return (
     <Button
       fullWidth
@@ -19,7 +21,7 @@ const LandingButtons: React.FC<LandingButtonsProps> = ({ text, onClick }) => {
       }}
       onClick={() => onClick()}
     >
-      {text}
+      {loading ? "Loading..." : text}
     </Button>
   );
 };

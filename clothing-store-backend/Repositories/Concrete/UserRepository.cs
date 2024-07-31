@@ -9,7 +9,8 @@ namespace clothing_store_backend.Repositories.Concrete
     {
         private readonly DataContext _context;
 
-        public UserRepository(DataContext context) { 
+        public UserRepository(DataContext context)
+        {
             _context = context;
         }
 
@@ -23,7 +24,7 @@ namespace clothing_store_backend.Repositories.Concrete
             return await _context.Users.FindAsync(id);
 
         }
-        
+
         public async Task AddUserAsync(User user)
         {
             _context.Users.Add(user);
@@ -33,7 +34,8 @@ namespace clothing_store_backend.Repositories.Concrete
         public async Task<bool> UpdateUserAsync(User user)
         {
             var existingUser = await _context.Users.FindAsync(user.Id);
-            if (existingUser is null) {
+            if (existingUser is null)
+            {
                 return false;
             }
 
@@ -53,6 +55,16 @@ namespace clothing_store_backend.Repositories.Concrete
                 _context.Remove(user);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<User> GetUserByUsernameAsync(string username)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        }
+
+        public async Task<bool> IsUsernameTakenAsync(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.Username == username);
         }
     }
 }

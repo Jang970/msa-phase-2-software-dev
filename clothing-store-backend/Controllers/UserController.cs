@@ -12,7 +12,7 @@ namespace clothing_store_backend.Controllers
         private readonly IUserRepository _userRepository;
 
         public UserController(IUserRepository userRepository)
-        {  _userRepository = userRepository; }
+        { _userRepository = userRepository; }
 
         // GET
         [HttpGet]
@@ -22,12 +22,12 @@ namespace clothing_store_backend.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<User>> GetUser(string username)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
-
-            if (user == null) {
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            if (user == null)
+            {
                 return NotFound();
             }
 
@@ -45,8 +45,12 @@ namespace clothing_store_backend.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
-            await _userRepository.AddUserAsync(user);
+            if (await _userRepository.IsUsernameTakenAsync(user.Username))
+            {
+                return BadRequest("Username is already taken");
+            }
 
+            await _userRepository.AddUserAsync(user);
             var newUser = _userRepository.GetUserByIdAsync(user.Id);
 
             return Ok(newUser);
@@ -56,7 +60,8 @@ namespace clothing_store_backend.Controllers
         public async Task<IActionResult> DeleteUser(long id)
         {
             var user = _userRepository.GetUserByIdAsync(id);
-            if (user == null) {
+            if (user == null)
+            {
                 return NotFound();
             }
 
@@ -65,6 +70,6 @@ namespace clothing_store_backend.Controllers
             return NoContent();
         }
 
-            
+
     }
 }
