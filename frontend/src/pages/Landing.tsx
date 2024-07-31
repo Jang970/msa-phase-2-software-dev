@@ -14,14 +14,22 @@ const Landing: React.FC = () => {
     <Stack
       sx={{
         width: "100%",
-        height: "100%",
+        height: "100vh",
         alignItems: "center",
         justifyContent: "center",
-        gap: 8,
-        mt: 4,
+        gap: 4,
       }}
     >
-      <Typography variant="h1">StyloSpotter</Typography>
+      <Typography
+        sx={{
+          typography: {
+            xs: "h3",
+            md: "h1",
+          },
+        }}
+      >
+        StyloSpotter
+      </Typography>
       {isRegister ? (
         <Register handleBack={handleClick} />
       ) : (

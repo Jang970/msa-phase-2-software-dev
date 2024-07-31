@@ -9,7 +9,15 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ handleBack }) => {
   return (
     <LandingCards>
-      <Typography variant="h4" color="white">
+      <Typography
+        sx={{
+          typography: {
+            xs: "h5",
+            md: "h4",
+          },
+        }}
+        color="white"
+      >
         Login
       </Typography>
       <TextField label="Username" fullWidth />

@@ -10,7 +10,15 @@ type RegisterProps = {
 const Register: React.FC<RegisterProps> = ({ handleBack }) => {
   return (
     <LandingCards>
-      <Typography variant="h4" color="white">
+      <Typography
+        sx={{
+          typography: {
+            xs: "h5",
+            md: "h4",
+          },
+        }}
+        color="white"
+      >
         Register
       </Typography>
       <TextField label="Username" fullWidth />
