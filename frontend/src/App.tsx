@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import Home from "./pages/Home";
@@ -12,6 +17,7 @@ import { darkTheme, lightTheme } from "./theme";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import NotFound from "./pages/NotFound";
+import Landing from "./pages/Landing";
 
 export const ColourModeContext = createContext({
   toggleColourMode: () => {},
@@ -46,9 +52,10 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <Navbar />
+          <ConditionalNavbar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/shirts" element={<Shirts />} />
             <Route path="/pants" element={<Pants />} />
             <Route path="/jackets" element={<Jackets />} />
@@ -61,6 +68,15 @@ const App: React.FC = () => {
       </ThemeProvider>
     </ColourModeContext.Provider>
   );
+};
+
+const ConditionalNavbar: React.FC = () => {
+  const location = useLocation();
+  if (location.pathname === "/") {
+    return null;
+  }
+
+  return <Navbar />;
 };
 
 export default App;

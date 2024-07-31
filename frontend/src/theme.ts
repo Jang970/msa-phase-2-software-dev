@@ -14,6 +14,7 @@ const generalComponentStyles = {
         "&:hover .MuiOutlinedInput-notchedOutline": {
           borderColor: grey[400],
         },
+        color: "white",
       },
     },
   },

@@ -21,7 +21,7 @@ import HomeIcon from "@mui/icons-material/Home";
 //todo: search bar
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const categories = ["shirts", "pants", "jackets", "hats"];
+  const pages = ["home", "shirts", "pants", "jackets", "hats"];
 
   const theme = useTheme();
   const colourMode = useContext(ColourModeContext);
@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
     <AppBar enableColorOnDark sx={{ position: { xs: "fixed", md: "static" } }}>
       <Toolbar>
         {isMobile ? (
-          <IconButton onClick={() => handleNavigation("/")} color="inherit">
+          <IconButton onClick={() => handleNavigation("/home")} color="inherit">
             <HomeIcon />
           </IconButton>
         ) : (
@@ -47,17 +47,14 @@ const Navbar: React.FC = () => {
               gap: 5,
             }}
           >
-            <Link href="/" underline="none" color="inherit">
-              Home
-            </Link>
-            {categories.map((category) => (
+            {pages.map((page) => (
               <Link
-                key={category}
-                href={`/${category}`}
+                key={page}
+                href={`/${page}`}
                 underline="none"
                 color="inherit"
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {page.charAt(0).toUpperCase() + page.slice(1)}
               </Link>
             ))}
           </Box>
@@ -66,7 +63,7 @@ const Navbar: React.FC = () => {
           <Autocomplete
             freeSolo
             size="small"
-            options={categories}
+            options={pages}
             renderInput={(params) => (
               <TextField
                 {...params}
