@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Cart from "./pages/Cart";
-import Product from "./pages/Product";
+import Products from "./pages/Products";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Shirts from "./pages/Shirts";
@@ -53,7 +53,7 @@ const App: React.FC = () => {
             <Route path="/pants" element={<Pants />} />
             <Route path="/jackets" element={<Jackets />} />
             <Route path="/hats" element={<Hats />} />
-            <Route path="/product/:id" element={<Product />} />
+            <Route path="/products/:id" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -4,13 +4,13 @@ import { Box, Grid } from "@mui/material";
 import { getProducts } from "../../services/productServices";
 import { Product } from "../../models/product";
 
-const product = {
-  image: "https://via.placeholder.com/300",
-  name: "Product Name",
-  price: "100",
-};
+// const product = {
+//   image: "https://via.placeholder.com/300",
+//   name: "Product Name",
+//   price: "100",
+// };
 
-const products = Array.from({ length: 8 }, () => product);
+// const products = Array.from({ length: 8 }, () => product);
 
 //todo: will be dynamic based on the current page i.e home, shirts, pants, jackets, hats
 const ProductList: React.FC = () => {
@@ -42,11 +42,7 @@ const ProductList: React.FC = () => {
       <Grid container spacing={3}>
         {products.map((product, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <ProductCard
-              image={product.imageUrl}
-              name={product.name}
-              price={product.price}
-            />
+            <ProductCard {...product} />
           </Grid>
         ))}
       </Grid>

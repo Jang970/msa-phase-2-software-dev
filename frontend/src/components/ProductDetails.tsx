@@ -9,32 +9,31 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Product } from "../models/product";
+import { useNavigate } from "react-router-dom";
 
-type ProductDetailsProps = {
-  name: string;
-  price: string;
-  image: string;
-  description: string;
-};
-
-const ProductDetails: React.FC<ProductDetailsProps> = ({
+const ProductDetails: React.FC<Product> = ({
   name,
   price,
-  image,
+  imageUrl,
   description,
 }) => {
+  const navigate = useNavigate();
+
   return (
-    <Card sx={{ p: 2, maxWidth: 700, borderRadius: "1rem" }}>
+    <Card
+      sx={{ p: 2, maxWidth: 700, borderRadius: "1rem", mt: { xs: 8, md: 0 } }}
+    >
       <CardHeader
         title={name}
         subheader={`$${price}`}
         action={
-          <IconButton>
+          <IconButton onClick={() => navigate(-1)}>
             <ArrowBackIcon />
           </IconButton>
         }
       />
-      <CardMedia component="img" height={400} image={image} />
+      <CardMedia component="img" height={400} image={imageUrl} />
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Overview

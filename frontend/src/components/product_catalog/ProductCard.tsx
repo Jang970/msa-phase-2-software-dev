@@ -7,22 +7,24 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-
-type ProductCardProps = {
-  image: string;
-  name: string;
-  price: number;
-};
+import { useNavigate } from "react-router-dom";
+import { Product } from "../../models/product";
 
 // todo: will be dynamic and accept props
-const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
+const ProductCard: React.FC<Product> = ({ id, imageUrl, name, price }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/products/${id}`);
+  };
+
   return (
     <Card sx={{ borderRadius: "0.25rem" }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           height={250}
           component="img"
-          image={image}
+          image={imageUrl}
           alt="product-image"
         />
         <CardContent>
