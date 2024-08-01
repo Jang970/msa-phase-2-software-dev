@@ -2,12 +2,14 @@ import { Stack, Typography } from "@mui/material";
 import Login from "../components/landing/Login";
 import Register from "../components/landing/Register";
 import { useState } from "react";
+import { useUserStore } from "../stores/userStore";
 
 const Landing: React.FC = () => {
   const [isRegister, setIsRegister] = useState(false);
 
   const handleClick = () => {
     setIsRegister(!isRegister);
+    useUserStore.setState({ error: "" });
   };
 
   return (

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { User } from "../models/user";
-
-const API_URL = "http://localhost:5221";
+import { API_URL } from "./apiUrl";
 
 export const getUser = async (username: string) => {
   const response = await axios.get(`${API_URL}/api/User/${username}`);

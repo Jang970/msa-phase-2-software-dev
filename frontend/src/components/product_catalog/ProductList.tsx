@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { Box, Grid } from "@mui/material";
 import { useProductStore } from "../../stores/productStore";
-import Error from "../Error";
+import Error from "../util/Error";
 
 // const product = {
 //   image: "https://via.placeholder.com/300",

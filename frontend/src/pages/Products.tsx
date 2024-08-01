@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../models/product";
 import { getProductById } from "../services/productServices";
-import Error from "../components/Error";
+import Error from "../components/util/Error";
 
 // const product = {
 //   image: "https://via.placeholder.com/300",

@@ -3,6 +3,7 @@ import {
   Route,
   Routes,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
@@ -12,12 +13,14 @@ import Shirts from "./pages/Shirts";
 import Pants from "./pages/Pants";
 import Jackets from "./pages/Jackets";
 import Hats from "./pages/Hats";
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { darkTheme, lightTheme } from "./theme";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import NotFound from "./pages/NotFound";
 import Landing from "./pages/Landing";
+import { useUserStore } from "./stores/userStore";
+import ProtectedRoute from "./components/util/ProtectedRoute";
 
 export const ColourModeContext = createContext({
   toggleColourMode: () => {},
@@ -52,17 +55,19 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <ConditionalNavbar />
+          <ConditionalRenderingAndRedirection />
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/shirts" element={<Shirts />} />
-            <Route path="/pants" element={<Pants />} />
-            <Route path="/jackets" element={<Jackets />} />
-            <Route path="/hats" element={<Hats />} />
-            <Route path="/products/:id" element={<Products />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/shirts" element={<Shirts />} />
+              <Route path="/pants" element={<Pants />} />
+              <Route path="/jackets" element={<Jackets />} />
+              <Route path="/hats" element={<Hats />} />
+              <Route path="/products/:id" element={<Products />} />
+              <Route path="/cart" element={<Cart />} />
+            </Route>
           </Routes>
         </Router>
       </ThemeProvider>
@@ -70,8 +75,17 @@ const App: React.FC = () => {
   );
 };
 
-const ConditionalNavbar: React.FC = () => {
+const ConditionalRenderingAndRedirection: React.FC = () => {
+  const user = useUserStore((state) => state.user);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user && location.pathname === "/") {
+      navigate("/home");
+    }
+  }, [user, navigate, location]);
+
   if (location.pathname === "/") {
     return null;
   }

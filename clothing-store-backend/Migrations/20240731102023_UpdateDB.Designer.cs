@@ -11,8 +11,8 @@ using clothing_store_backend.Data;
 namespace clothing_store_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240730040646_InitCreate")]
-    partial class InitCreate
+    [Migration("20240731102023_UpdateDB")]
+    partial class UpdateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,9 +115,12 @@ namespace clothing_store_backend.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

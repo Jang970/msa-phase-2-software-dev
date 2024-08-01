@@ -4,51 +4,64 @@ import { createUser, getUser } from "../services/userServices";
 import axios from "axios";
 
 type UserStore = {
-  user: User | undefined;
+  user: User | null;
   error: string;
   loading: boolean;
   fetchUser: (username: string) => Promise<void>;
   createUser: (user: User) => Promise<void>;
+  logout: () => void;
 };
 
 export const useUserStore = create<UserStore>((set) => ({
-  user: undefined,
+  user: JSON.parse(localStorage.getItem("user") || "null"),
   error: "",
   loading: false,
+
   fetchUser: async (username: string) => {
+    set({ loading: true, error: "" });
     try {
-      set({ loading: true });
       const data = await getUser(username);
+      localStorage.setItem("user", JSON.stringify(data));
       set({ user: data });
-      console.log("user fetched!", data);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        if (err.response && err.response.status === 404) {
-          set({ error: "User not found." });
-        } else {
-          set({ error: "Error fetching user." });
-        }
+        const errorMessage =
+          err.response && err.response.status === 404
+            ? "User not found."
+            : "Error fetching user.";
+        set({ error: errorMessage });
+      } else {
+        set({ error: "An unexpected error occurred." });
       }
     } finally {
       set({ loading: false });
     }
   },
+
   createUser: async (user: User) => {
+    set({ loading: true, error: "" });
     try {
-      set({ loading: true });
       const newUser = await createUser(user);
+      localStorage.setItem("user", JSON.stringify(newUser));
       set({ user: newUser });
-      console.log("new user made!", newUser);
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        if (err.response && err.response.status === 400) {
-          set({ error: "User already exists." });
-        } else {
-          set({ error: "Error creating user." });
-        }
+        const errorMessage =
+          err.response && err.response.status === 400
+            ? "User already exists."
+            : "Error creating user.";
+        set({ error: errorMessage });
+      } else {
+        set({ error: "An unexpected error occurred." });
       }
     } finally {
       set({ loading: false });
     }
+  },
+
+  logout: () => {
+    localStorage.removeItem("user");
+    console.log("user logged out!");
+    set({ user: null });
   },
 }));
