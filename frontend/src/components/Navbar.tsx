@@ -16,12 +16,14 @@ import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { ColourModeContext } from "../App";
 import { useContext } from "react";
 import HomeIcon from "@mui/icons-material/Home";
+import { useProductStore } from "../stores/productStore";
 
 //todo: add links to shirts, pants, jackets, hats products
 //todo: search bar
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const pages = ["home", "shirts", "pants", "jackets", "hats"];
+  const products = useProductStore((state) => state.products);
 
   const theme = useTheme();
   const colourMode = useContext(ColourModeContext);
@@ -63,7 +65,7 @@ const Navbar: React.FC = () => {
           <Autocomplete
             freeSolo
             size="small"
-            options={pages}
+            options={products.map((product) => product.name)}
             renderInput={(params) => (
               <TextField
                 {...params}

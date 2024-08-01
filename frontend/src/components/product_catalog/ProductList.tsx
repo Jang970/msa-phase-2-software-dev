@@ -1,37 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductCard from "./ProductCard";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useProductStore } from "../../stores/productStore";
 import Error from "../util/Error";
 
-// const product = {
-//   image: "https://via.placeholder.com/300",
-//   name: "Product Name",
-//   price: "100",
-// };
+type ProductListProps = {
+  category: string;
+};
 
-// const products = Array.from({ length: 8 }, () => product);
-
-//todo: will be dynamic based on the current page i.e home, shirts, pants, jackets, hats
-const ProductList: React.FC = () => {
+const ProductList: React.FC<ProductListProps> = ({ category }) => {
   const products = useProductStore((state) => state.products);
-  const loading = useProductStore((state) => state.loading);
   const error = useProductStore((state) => state.error);
-  const fetchAllProducts = useProductStore((state) => state.fetchAllProducts);
+  const loading = useProductStore((state) => state.loading);
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const displayedProducts =
+    category === "all"
+      ? products
+      : products.filter((product) => product.category === category);
 
   return (
     <Box flexGrow={1}>
+      {loading && <Typography variant="h6">Loading...</Typography>}
       {error && <Error text={error} />}
       <Grid container spacing={3}>
-        {products.map((product, index) => (
+        {displayedProducts.map((product, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
             <ProductCard {...product} />
           </Grid>

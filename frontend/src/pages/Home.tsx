@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       py={4}
       pt={{ xs: 10, md: 4 }}
     >
-      <ProductList />
+      <ProductList category="all" />
     </Stack>
   );
 };

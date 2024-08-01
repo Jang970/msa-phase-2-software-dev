@@ -21,6 +21,7 @@ import NotFound from "./pages/NotFound";
 import Landing from "./pages/Landing";
 import { useUserStore } from "./stores/userStore";
 import ProtectedRoute from "./components/util/ProtectedRoute";
+import ProductLoader from "./components/util/ProductLoader";
 
 export const ColourModeContext = createContext({
   toggleColourMode: () => {},
@@ -56,6 +57,7 @@ const App: React.FC = () => {
         <CssBaseline />
         <Router>
           <ConditionalRenderingAndRedirection />
+          <ProductLoader />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="*" element={<NotFound />} />
