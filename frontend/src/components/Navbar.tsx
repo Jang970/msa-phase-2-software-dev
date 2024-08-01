@@ -14,12 +14,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { ColourModeContext } from "../App";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import { useProductStore } from "../stores/productStore";
 
-//todo: add links to shirts, pants, jackets, hats products
-//todo: search bar
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const pages = ["home", "shirts", "pants", "jackets", "hats"];
@@ -29,8 +27,32 @@ const Navbar: React.FC = () => {
   const colourMode = useContext(ColourModeContext);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const [searchValue, setSearchValue] = useState("");
+
   const handleNavigation = (path: string) => {
     navigate(path);
+  };
+
+  const handleSearchChange = (
+    event: React.ChangeEvent<{}>,
+    value: string | null
+  ) => {
+    if (value) {
+      const selectedProduct = products.find(
+        (product) => product.name === value
+      );
+      if (selectedProduct) {
+        setSearchValue("");
+        navigate(`/products/${selectedProduct.id}`);
+      }
+    }
+  };
+
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<{}>,
+    value: string
+  ) => {
+    setSearchValue(value);
   };
 
   return (
@@ -66,6 +88,9 @@ const Navbar: React.FC = () => {
             freeSolo
             size="small"
             options={products.map((product) => product.name)}
+            onChange={handleSearchChange}
+            onInputChange={handleSearchInputChange}
+            value={searchValue}
             renderInput={(params) => (
               <TextField
                 {...params}
