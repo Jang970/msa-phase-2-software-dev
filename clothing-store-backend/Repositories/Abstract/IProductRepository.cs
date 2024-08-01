@@ -6,8 +6,6 @@ namespace clothing_store_backend.Repositories.Abstract
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
         Task<Product> GetProductByIdAsync(long id);
-        Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
         Task AddProductAsync(Product product);
-        Task<bool> UpdateProductViewsAsync(long id); // To increment the view count
     }
 }

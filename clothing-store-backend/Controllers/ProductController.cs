@@ -34,12 +34,6 @@ namespace clothing_store_backend.Controllers
             return Ok(product);
         }
 
-        [HttpGet("category/{category}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(string category)
-        {
-            var products = await _productRepository.GetProductsByCategoryAsync(category);
-            return Ok(products);
-        }
 
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
