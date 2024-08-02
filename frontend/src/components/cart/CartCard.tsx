@@ -1,23 +1,15 @@
 import { Card, CardContent, Box, Typography } from "@mui/material";
 import OrderSummary from "./OrderSummary";
 import CartItemCard from "./CartItemCard";
-import { useCartStore } from "../../stores/cartStore";
-import { useUserStore } from "../../stores/userStore";
-import { useEffect } from "react";
+import { CartItem } from "../../models/cartItem";
 
-const CartCard: React.FC = () => {
-  const fetchCart = useCartStore((state) => state.fetchCart);
-  const cartItems = useCartStore((state) => state.cartItems || []);
-  const loading = useCartStore((state) => state.loading);
-  const error = useCartStore((state) => state.error);
-  const user = useUserStore((state) => state.user);
+type CartCardProps = {
+  cartItems: CartItem[];
+  loading: boolean;
+  error: string;
+};
 
-  useEffect(() => {
-    if (user && user.id) {
-      fetchCart(user.id);
-    }
-  }, [user, fetchCart]);
-
+const CartCard: React.FC<CartCardProps> = ({ cartItems, loading, error }) => {
   return (
     <Card sx={{ width: { xs: "90%", md: "65%" }, borderRadius: "1rem" }}>
       <CardContent
