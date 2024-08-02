@@ -37,9 +37,14 @@ namespace clothing_store_backend.Controllers
         [HttpPut]
         public async Task<ActionResult<User>> UpdateUser(User user)
         {
-            var dbUser = await _userRepository.UpdateUserAsync(user);
+            var updatedUser = await _userRepository.UpdateUserAsync(user);
 
-            return Ok(dbUser);
+            if (updatedUser is null) { 
+            
+                return NotFound();
+            }
+
+            return Ok(updatedUser);
         }
 
         [HttpPost]
@@ -59,7 +64,7 @@ namespace clothing_store_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
         {
-            var user = _userRepository.GetUserByIdAsync(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
             if (user == null)
             {
                 return NotFound();

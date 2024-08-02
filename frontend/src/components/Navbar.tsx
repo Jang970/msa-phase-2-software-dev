@@ -12,6 +12,7 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { ColourModeContext } from "../App";
 import { useContext, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
@@ -105,11 +106,17 @@ const Navbar: React.FC = () => {
           />
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: 2 }}>
-          <IconButton onClick={colourMode.toggleColourMode} color="inherit">
-            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+          <IconButton
+            color="inherit"
+            onClick={() => handleNavigation("/profile")}
+          >
+            <AccountCircleIcon />
           </IconButton>
           <IconButton color="inherit" onClick={() => handleNavigation("/cart")}>
             <ShoppingCartIcon />
+          </IconButton>
+          <IconButton onClick={colourMode.toggleColourMode} color="inherit">
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
         </Box>
       </Toolbar>

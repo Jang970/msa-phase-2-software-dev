@@ -8,7 +8,7 @@ namespace clothing_store_backend.Repositories.Abstract
         Task<User> GetUserByIdAsync(long id);
 
         Task AddUserAsync(User user);
-        Task<bool> UpdateUserAsync(User user);
+        Task<User> UpdateUserAsync(User user);
         Task DeleteUserAsync(long id);
         Task<User> GetUserByUsernameAsync(string username);
         Task<bool> IsUsernameTakenAsync(string username);

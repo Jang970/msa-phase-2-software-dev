@@ -35,19 +35,19 @@ namespace clothing_store_backend.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> UpdateUserAsync(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
             var existingUser = await _context.Users.FindAsync(user.Id);
             if (existingUser is null)
             {
-                return false;
+                return null;
             }
 
             existingUser.Username = user.Username;
             existingUser.FirstName = user.FirstName;
 
             await _context.SaveChangesAsync();
-            return true;
+            return existingUser;
         }
 
         public async Task DeleteUserAsync(long id)

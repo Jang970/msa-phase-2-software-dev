@@ -22,6 +22,7 @@ import Landing from "./pages/Landing";
 import { useUserStore } from "./stores/userStore";
 import ProtectedRoute from "./components/util/ProtectedRoute";
 import ProductLoader from "./components/util/ProductLoader";
+import Profile from "./pages/Profile";
 
 export const ColourModeContext = createContext({
   toggleColourMode: () => {},
@@ -69,6 +70,7 @@ const App: React.FC = () => {
               <Route path="/hats" element={<Hats />} />
               <Route path="/products/:id" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
           </Routes>
         </Router>
