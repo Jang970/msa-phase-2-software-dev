@@ -1,7 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import CartCard from "../components/cart/CartCard";
 
-//todo: dynamic
 const Cart: React.FC = () => {
   return (
     <Stack

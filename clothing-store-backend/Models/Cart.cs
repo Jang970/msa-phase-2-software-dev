@@ -1,4 +1,6 @@
-﻿namespace clothing_store_backend.Models
+﻿using System.Text.Json.Serialization;
+
+namespace clothing_store_backend.Models
 {
     public class Cart
     {

@@ -17,42 +17,48 @@ namespace clothing_store_backend.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<ActionResult<Cart>> GetCart(int userId)
+        public async Task<ActionResult<Cart>> GetCart(long userId)
         {
             var cart = await _cartRepository.GetCartByUserIdAsync(userId);
             if (cart == null)
             {
                 return NotFound();
             }
+
             return Ok(cart);
         }
 
-        [HttpPost("{userId}/add/{productId}")]
-        public async Task<ActionResult> AddToCart(int userId, int productId, [FromQuery] int quantity = 1)
+        [HttpPost("{userId}/add")]
+        public async Task<ActionResult<CartItem>> AddToCart(long userId, [FromBody] CartItemDto cartItem)
         {
-            await _cartRepository.AddToCartAsync(userId, productId, quantity);
-            return Ok();
+            var addedItem = await _cartRepository.AddToCartAsync(userId, cartItem.ProductId, cartItem.Quantity);
+            return Ok(addedItem);
+        }
+
+
+        [HttpPut("{userId}/update")]
+        public async Task<ActionResult<CartItem>> UpdateCartItem(long userId, [FromBody] CartItemDto cartItem)
+        {
+            var updatedItem = await _cartRepository.UpdateCartItemAsync(userId, cartItem.ProductId, cartItem.Quantity);
+            if (updatedItem == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedItem);
         }
 
         [HttpDelete("{userId}/remove/{productId}")]
-        public async Task<ActionResult> RemoveFromCart(int userId, int productId)
+        public async Task<IActionResult> RemoveFromCart(long userId, long productId)
         {
             await _cartRepository.RemoveFromCartAsync(userId, productId);
-            return Ok();
+            return NoContent();
         }
 
-        [HttpPost("{userId}/clear")]
-        public async Task<ActionResult> ClearCart(int userId)
+        [HttpDelete("{userId}/clear")]
+        public async Task<IActionResult> ClearCart(long userId)
         {
             await _cartRepository.ClearCartAsync(userId);
-            return Ok();
-        }
-
-        [HttpPost("{userId}/update/{productId}")]
-        public async Task<ActionResult> UpdateCartItemQuantity(int userId, int productId, [FromQuery] int quantity)
-        {
-            await _cartRepository.UpdateCartItemQuantityAsync(userId, productId, quantity);
-            return Ok();
+            return NoContent();
         }
 
     }

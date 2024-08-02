@@ -3,7 +3,6 @@ import { API_URL } from "./apiUrl";
 
 export const getProducts = async () => {
   const response = await axios.get(`${API_URL}/api/Product`);
-  console.log(response.data);
   return response.data;
 };
 

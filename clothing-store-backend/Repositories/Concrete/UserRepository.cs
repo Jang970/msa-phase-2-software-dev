@@ -29,6 +29,10 @@ namespace clothing_store_backend.Repositories.Concrete
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+
+            var cart = new Cart { UserId = user.Id };
+            _context.Carts.Add(cart);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> UpdateUserAsync(User user)

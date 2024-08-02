@@ -6,19 +6,34 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Product } from "../models/product";
 import { useNavigate } from "react-router-dom";
+import { useCartStore } from "../stores/cartStore";
+import { useUserStore } from "../stores/userStore";
+import useSnackbar from "../hooks/useSnackbar";
 
 const ProductDetails: React.FC<Product> = ({
+  id,
   name,
   price,
   imageUrl,
   description,
 }) => {
   const navigate = useNavigate();
+  const addToCart = useCartStore((state) => state.addItem);
+  const user = useUserStore((state) => state.user);
+  const { open, handleOpen, handleClose } = useSnackbar();
+
+  const handleAddToCart = () => {
+    if (user) {
+      addToCart(user.id, id, 1);
+      handleOpen();
+    }
+  };
 
   return (
     <Card
@@ -41,10 +56,17 @@ const ProductDetails: React.FC<Product> = ({
         <Typography variant="body2">{description}</Typography>
       </CardContent>
       <CardActions>
-        <Button fullWidth variant="contained">
+        <Button fullWidth variant="contained" onClick={handleAddToCart}>
           Add to Cart
         </Button>
       </CardActions>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        message="Added item to cart!"
+      />
     </Card>
   );
 };

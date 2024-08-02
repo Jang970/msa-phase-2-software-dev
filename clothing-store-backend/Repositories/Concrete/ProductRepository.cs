@@ -29,11 +29,5 @@ namespace clothing_store_backend.Repositories.Concrete
             return product;
         }
 
-        public async Task AddProductAsync(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-        }
-
     }
 }

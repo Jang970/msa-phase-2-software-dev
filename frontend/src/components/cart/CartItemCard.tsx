@@ -10,11 +10,25 @@ import {
 import Quantity from "./Quantity";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { grey } from "@mui/material/colors";
+import { CartItem } from "../../models/cartItem";
+import { useCartStore } from "../../stores/cartStore";
+import { useUserStore } from "../../stores/userStore";
 
-const CartItemCard: React.FC = () => {
+type CartItemCardProps = {
+  cartItem: CartItem;
+};
+
+const CartItemCard: React.FC<CartItemCardProps> = ({ cartItem }) => {
   const theme = useTheme();
-
+  const removeItem = useCartStore((state) => state.removeItem);
+  const user = useUserStore((state) => state.user);
   const backgroundColor = theme.palette.mode === "light" ? grey[50] : grey[900];
+
+  const handleRemove = () => {
+    if (user) {
+      removeItem(user.id, cartItem.productId);
+    }
+  };
 
   return (
     <Card sx={{ mt: 2, backgroundColor }}>
@@ -22,15 +36,18 @@ const CartItemCard: React.FC = () => {
         <Box display="flex" flexDirection="row" gap={2}>
           <CardMedia
             component="img"
-            src="https://via.placeholder.com/100"
+            src={cartItem.product.imageUrl}
             sx={{ height: { xs: 75, md: 100 }, width: { xs: 75, md: 100 } }}
           />
           <Box>
-            <Typography variant="h6">Product Name</Typography>
-            <Typography variant="body2">$100</Typography>
+            <Typography variant="h6">{cartItem.product.name}</Typography>
+            <Typography variant="body2">${cartItem.product.price}</Typography>
             <Box display="flex">
-              <Quantity />
-              <IconButton>
+              <Quantity
+                quantity={cartItem.quantity}
+                productId={cartItem.productId}
+              />
+              <IconButton onClick={handleRemove}>
                 <DeleteIcon />
               </IconButton>
             </Box>

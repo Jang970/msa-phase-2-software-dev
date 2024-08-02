@@ -1,7 +1,6 @@
 import {
   AppBar,
   Autocomplete,
-  Badge,
   Box,
   IconButton,
   Link,
@@ -110,9 +109,7 @@ const Navbar: React.FC = () => {
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           <IconButton color="inherit" onClick={() => handleNavigation("/cart")}>
-            <Badge badgeContent={0} color="secondary" showZero>
-              <ShoppingCartIcon />
-            </Badge>
+            <ShoppingCartIcon />
           </IconButton>
         </Box>
       </Toolbar>

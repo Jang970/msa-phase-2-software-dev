@@ -41,7 +41,8 @@ export const useUserStore = create<UserStore>((set) => ({
   createUser: async (user: User) => {
     set({ loading: true, error: "" });
     try {
-      const newUser = await createUser(user);
+      const data = await createUser(user);
+      const newUser = data.result;
       localStorage.setItem("user", JSON.stringify(newUser));
       set({ user: newUser });
     } catch (err: unknown) {

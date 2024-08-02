@@ -34,13 +34,5 @@ namespace clothing_store_backend.Controllers
             return Ok(product);
         }
 
-
-        [HttpPost]
-        public async Task<ActionResult> AddProduct(Product product)
-        {
-            await _productRepository.AddProductAsync(product);
-            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
-        }
-
     }
 }

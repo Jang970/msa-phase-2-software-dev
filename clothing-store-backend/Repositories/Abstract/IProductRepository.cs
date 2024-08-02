@@ -6,6 +6,5 @@ namespace clothing_store_backend.Repositories.Abstract
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
         Task<Product> GetProductByIdAsync(long id);
-        Task AddProductAsync(Product product);
     }
 }

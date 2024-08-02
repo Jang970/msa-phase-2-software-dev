@@ -13,7 +13,7 @@ import Error from "../components/util/Error";
 //   description:
 //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 // };
-
+// todo: refactor, remove unneeded api call
 //todo: dynamic
 const Products: React.FC = () => {
   const { id } = useParams<{ id: string }>();

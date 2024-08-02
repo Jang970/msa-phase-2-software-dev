@@ -24,10 +24,9 @@ namespace clothing_store_backend.Data
                 .IsUnique();
 
             modelBuilder.Entity<Cart>()
-                 .HasMany(c => c.CartItems)
-                 .WithOne(ci => ci.Cart)
-                 .HasForeignKey(ci => ci.CartId)
-                 .OnDelete(DeleteBehavior.Cascade);
+                .HasMany(c => c.CartItems)
+                .WithOne(ci => ci.Cart)
+                .HasForeignKey(ci => ci.CartId);
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(ci => ci.Product)
