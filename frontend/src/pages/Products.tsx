@@ -1,44 +1,20 @@
-import { Alert, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import ProductDetails from "../components/ProductDetails";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../models/product";
-import { getProductById } from "../services/productServices";
 import Error from "../components/util/Error";
+import { useProductStore } from "../stores/productStore";
 
-// const product = {
-//   image: "https://via.placeholder.com/300",
-//   name: "Product Name",
-//   price: "100",
-//   description:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-// };
-// todo: refactor, remove unneeded api call
-//todo: dynamic
 const Products: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
+  const [product, setProduct] = useState<Product | undefined>(undefined);
+  const error = useProductStore((state) => state.error);
+  const products = useProductStore((state) => state.products);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const data = await getProductById(Number(id));
-        setProduct(data);
-      } catch (err) {
-        setError("Error fetching product.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [id]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    setProduct(products.find((product) => product.id === Number(id)));
+  }, []);
 
   return (
     <Stack

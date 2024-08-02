@@ -22,7 +22,6 @@ import Landing from "./pages/Landing";
 import { useUserStore } from "./stores/userStore";
 import ProtectedRoute from "./components/util/ProtectedRoute";
 import ProductLoader from "./components/util/ProductLoader";
-import { useCartStore } from "./stores/cartStore";
 
 export const ColourModeContext = createContext({
   toggleColourMode: () => {},

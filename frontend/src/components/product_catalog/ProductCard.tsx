@@ -6,14 +6,12 @@ import {
   CardContent,
   CardMedia,
   Snackbar,
-  SnackbarCloseReason,
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../models/product";
 import { useCartStore } from "../../stores/cartStore";
 import { useUserStore } from "../../stores/userStore";
-import { useState } from "react";
 import useSnackbar from "../../hooks/useSnackbar";
 
 const ProductCard: React.FC<Product> = ({ id, imageUrl, name, price }) => {

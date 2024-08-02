@@ -1,7 +1,6 @@
 import { Stack } from "@mui/material";
 import ProductList from "../components/product_catalog/ProductList";
 
-//todo: show all pants products
 const Pants: React.FC = () => {
   return (
     <Stack
