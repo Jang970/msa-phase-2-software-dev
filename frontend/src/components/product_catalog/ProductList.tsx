@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 import { Box, Grid, Typography } from "@mui/material";
 import { useProductStore } from "../../stores/productStore";
 import Error from "../util/Error";
+import Loader from "../util/Loader";
 
 type ProductListProps = {
   category: string;
@@ -18,9 +19,16 @@ const ProductList: React.FC<ProductListProps> = ({ category }) => {
       ? products
       : products.filter((product) => product.category === category);
 
+  if (loading) {
+    return (
+      <Box>
+        <Loader size={100} />
+      </Box>
+    );
+  }
+
   return (
     <Box flexGrow={1}>
-      {loading && <Typography variant="h6">Loading...</Typography>}
       {error && <Error text={error} />}
       <Grid container spacing={3}>
         {displayedProducts.map((product, index) => (

@@ -20,6 +20,7 @@ const LandingButtons: React.FC<LandingButtonsProps> = ({ text, onClick }) => {
         "&:hover": { backgroundColor: grey[400] },
       }}
       onClick={() => onClick()}
+      disabled={loading}
     >
       {loading ? "Loading..." : text}
     </Button>

@@ -19,6 +19,7 @@ import { useUserStore } from "../stores/userStore";
 import useSnackbar from "../hooks/useSnackbar";
 import { useState } from "react";
 import { grey, indigo } from "@mui/material/colors";
+import Loader from "../components/util/Loader";
 
 const Profile: React.FC = () => {
   const user = useUserStore((state) => state.user);
@@ -26,6 +27,7 @@ const Profile: React.FC = () => {
   const deleteUser = useUserStore((state) => state.deleteUser);
   const logOut = useUserStore((state) => state.logout);
   const error = useUserStore((state) => state.error);
+  const loading = useUserStore((state) => state.loading);
   const [isEditing, setIsEditing] = useState(false);
   const [editUser, setEditUser] = useState(user);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -85,6 +87,7 @@ const Profile: React.FC = () => {
     >
       <Card sx={{ p: 2, backgroundColor: indigo[300], minWidth: 100 }}>
         <CardContent>
+          {loading && <Loader size={100} />}
           {isEditing ? (
             <>
               <TextField

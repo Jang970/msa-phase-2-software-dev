@@ -13,6 +13,8 @@ import { Product } from "../../models/product";
 import { useCartStore } from "../../stores/cartStore";
 import { useUserStore } from "../../stores/userStore";
 import useSnackbar from "../../hooks/useSnackbar";
+import { useProductStore } from "../../stores/productStore";
+import Loader from "../util/Loader";
 
 const ProductCard: React.FC<Product> = ({ id, imageUrl, name, price }) => {
   const navigate = useNavigate();
