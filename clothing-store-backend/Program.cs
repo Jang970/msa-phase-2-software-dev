@@ -18,7 +18,13 @@ builder.Services.AddControllers()
     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // configure db context
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (builder.Environment.IsDevelopment())
+{
+    connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
+}
+
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -33,7 +39,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // Replace with your frontend URL
+        policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
