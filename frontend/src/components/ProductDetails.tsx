@@ -6,35 +6,49 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Product } from "../models/product";
+import { useNavigate } from "react-router-dom";
+import { useCartStore } from "../stores/cartStore";
+import { useUserStore } from "../stores/userStore";
+import useSnackbar from "../hooks/useSnackbar";
 
-type ProductDetailsProps = {
-  name: string;
-  price: string;
-  image: string;
-  description: string;
-};
-
-const ProductDetails: React.FC<ProductDetailsProps> = ({
+const ProductDetails: React.FC<Product> = ({
+  id,
   name,
   price,
-  image,
+  imageUrl,
   description,
 }) => {
+  const navigate = useNavigate();
+  const addToCart = useCartStore((state) => state.addItem);
+  const user = useUserStore((state) => state.user);
+  const { open, handleOpen, handleClose } = useSnackbar();
+
+  const handleAddToCart = () => {
+    if (user) {
+      addToCart(user.id, id, 1);
+      handleOpen();
+    }
+  };
+
   return (
-    <Card sx={{ p: 2, maxWidth: 700, borderRadius: "1rem" }}>
+    <Card
+      sx={{ p: 2, maxWidth: 700, borderRadius: "1rem", mt: { xs: 8, md: 0 } }}
+    >
       <CardHeader
         title={name}
         subheader={`$${price}`}
         action={
-          <IconButton>
+          <IconButton onClick={() => navigate(-1)}>
             <ArrowBackIcon />
           </IconButton>
         }
       />
-      <CardMedia component="img" height={400} image={image} />
+      <CardMedia component="img" height={400} image={imageUrl} />
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Overview
@@ -42,10 +56,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
         <Typography variant="body2">{description}</Typography>
       </CardContent>
       <CardActions>
-        <Button fullWidth variant="contained">
+        <Button fullWidth variant="contained" onClick={handleAddToCart}>
           Add to Cart
         </Button>
       </CardActions>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        message="Added item to cart!"
+      />
     </Card>
   );
 };

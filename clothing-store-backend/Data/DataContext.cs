@@ -10,8 +10,8 @@ namespace clothing_store_backend.Data
 
         }
 
-        public DbSet<User> Users{ get; set; }
-        public DbSet<Product> Products{ get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
 
@@ -19,11 +19,14 @@ namespace clothing_store_backend.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
             modelBuilder.Entity<Cart>()
-                 .HasMany(c => c.CartItems)
-                 .WithOne(ci => ci.Cart)
-                 .HasForeignKey(ci => ci.CartId)
-                 .OnDelete(DeleteBehavior.Cascade);
+                .HasMany(c => c.CartItems)
+                .WithOne(ci => ci.Cart)
+                .HasForeignKey(ci => ci.CartId);
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(ci => ci.Product)

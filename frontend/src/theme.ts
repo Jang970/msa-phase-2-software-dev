@@ -14,6 +14,19 @@ const generalComponentStyles = {
         "&:hover .MuiOutlinedInput-notchedOutline": {
           borderColor: grey[400],
         },
+        color: "white",
+      },
+      input: {
+        // Custom CSS to hide the clear button
+        '&[type="search"]::-webkit-search-cancel-button': {
+          display: "none",
+        },
+        '&[type="search"]::-ms-clear': {
+          display: "none",
+        },
+        '&[type="search"]::-moz-clear': {
+          display: "none",
+        },
       },
     },
   },

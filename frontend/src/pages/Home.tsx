@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import ProductList from "../components/product_catalog/ProductList";
 
 const Home: React.FC = () => {
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       py={4}
       pt={{ xs: 10, md: 4 }}
     >
-      <ProductList />
+      <ProductList category="all" />
     </Stack>
   );
 };

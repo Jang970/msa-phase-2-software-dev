@@ -24,35 +24,10 @@ namespace clothing_store_backend.Repositories.Concrete
             var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
-                product.Views++;
                 await _context.SaveChangesAsync();
             }
             return product;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category)
-        {
-            return await _context.Products
-                                 .Where(p => p.Category == category)
-                                 .ToListAsync();
-        }
-
-        public async Task AddProductAsync(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<bool> UpdateProductViewsAsync(long id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                product.Views++;
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            return false;
-        }
     }
 }

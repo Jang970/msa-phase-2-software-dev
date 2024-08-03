@@ -1,7 +1,6 @@
 import {
   AppBar,
   Autocomplete,
-  Badge,
   Box,
   IconButton,
   Link,
@@ -13,29 +12,54 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { ColourModeContext } from "../App";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
+import { useProductStore } from "../stores/productStore";
 
-//todo: add links to shirts, pants, jackets, hats products
-//todo: search bar
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const categories = ["shirts", "pants", "jackets", "hats"];
+  const pages = ["home", "shirts", "pants", "jackets", "hats"];
+  const products = useProductStore((state) => state.products);
 
   const theme = useTheme();
   const colourMode = useContext(ColourModeContext);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const [searchValue, setSearchValue] = useState("");
+
   const handleNavigation = (path: string) => {
     navigate(path);
+  };
+
+  const handleSearchChange = (
+    _event: React.ChangeEvent<{}>,
+    value: string | null
+  ) => {
+    if (value) {
+      const selectedProduct = products.find(
+        (product) => product.name === value
+      );
+      if (selectedProduct) {
+        setSearchValue("");
+        navigate(`/products/${selectedProduct.id}`);
+      }
+    }
+  };
+
+  const handleSearchInputChange = (
+    _event: React.ChangeEvent<{}>,
+    value: string
+  ) => {
+    setSearchValue(value);
   };
 
   return (
     <AppBar enableColorOnDark sx={{ position: { xs: "fixed", md: "static" } }}>
       <Toolbar>
         {isMobile ? (
-          <IconButton onClick={() => handleNavigation("/")} color="inherit">
+          <IconButton onClick={() => handleNavigation("/home")} color="inherit">
             <HomeIcon />
           </IconButton>
         ) : (
@@ -47,17 +71,14 @@ const Navbar: React.FC = () => {
               gap: 5,
             }}
           >
-            <Link href="/" underline="none" color="inherit">
-              Home
-            </Link>
-            {categories.map((category) => (
+            {pages.map((page) => (
               <Link
-                key={category}
-                href={`/${category}`}
+                key={page}
+                href={`/${page}`}
                 underline="none"
                 color="inherit"
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {page.charAt(0).toUpperCase() + page.slice(1)}
               </Link>
             ))}
           </Box>
@@ -66,7 +87,10 @@ const Navbar: React.FC = () => {
           <Autocomplete
             freeSolo
             size="small"
-            options={categories}
+            options={products.map((product) => product.name)}
+            onChange={handleSearchChange}
+            onInputChange={handleSearchInputChange}
+            value={searchValue}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -82,13 +106,17 @@ const Navbar: React.FC = () => {
           />
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, ml: 2 }}>
-          <IconButton onClick={colourMode.toggleColourMode} color="inherit">
-            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+          <IconButton
+            color="inherit"
+            onClick={() => handleNavigation("/profile")}
+          >
+            <AccountCircleIcon />
           </IconButton>
           <IconButton color="inherit" onClick={() => handleNavigation("/cart")}>
-            <Badge badgeContent={0} color="secondary" showZero>
-              <ShoppingCartIcon />
-            </Badge>
+            <ShoppingCartIcon />
+          </IconButton>
+          <IconButton onClick={colourMode.toggleColourMode} color="inherit">
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
         </Box>
       </Toolbar>

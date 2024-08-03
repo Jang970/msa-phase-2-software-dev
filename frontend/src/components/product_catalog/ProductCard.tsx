@@ -5,24 +5,39 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Snackbar,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Product } from "../../models/product";
+import { useCartStore } from "../../stores/cartStore";
+import { useUserStore } from "../../stores/userStore";
+import useSnackbar from "../../hooks/useSnackbar";
 
-type ProductCardProps = {
-  image: string;
-  name: string;
-  price: string;
-};
+const ProductCard: React.FC<Product> = ({ id, imageUrl, name, price }) => {
+  const navigate = useNavigate();
+  const addToCart = useCartStore((state) => state.addItem);
+  const user = useUserStore((state) => state.user);
+  const { open, handleOpen, handleClose } = useSnackbar();
 
-// todo: will be dynamic and accept props
-const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
+  const handleClick = () => {
+    navigate(`/products/${id}`);
+  };
+
+  const handleAddToCart = () => {
+    if (user) {
+      addToCart(user.id, id, 1);
+      handleOpen();
+    }
+  };
+
   return (
     <Card sx={{ borderRadius: "0.25rem" }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           height={250}
           component="img"
-          image={image}
+          image={imageUrl}
           alt="product-image"
         />
         <CardContent>
@@ -33,10 +48,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button fullWidth variant="contained" sx={{ m: 1 }}>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ m: 1 }}
+          onClick={handleAddToCart}
+        >
           Add to Cart
         </Button>
       </CardActions>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        message="Added item to cart!"
+      />
     </Card>
   );
 };
