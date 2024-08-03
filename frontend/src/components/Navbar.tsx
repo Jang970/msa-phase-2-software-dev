@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleSearchChange = (
-    event: React.ChangeEvent<{}>,
+    _event: React.ChangeEvent<{}>,
     value: string | null
   ) => {
     if (value) {
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleSearchInputChange = (
-    event: React.ChangeEvent<{}>,
+    _event: React.ChangeEvent<{}>,
     value: string
   ) => {
     setSearchValue(value);
