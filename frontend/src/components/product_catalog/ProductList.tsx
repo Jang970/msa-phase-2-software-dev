@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useProductStore } from "../../stores/productStore";
 import Error from "../util/Error";
 import Loader from "../util/Loader";
