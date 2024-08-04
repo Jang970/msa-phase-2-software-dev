@@ -22,7 +22,7 @@ Don't want to scroll? No worries, you can search it up instead! Want to change y
 
 ### Backend
 
-#### Step 1: Navigate to backend directory in Terminal
+#### Step 1: Navigate to backend directory in Command Prompt
 `cd clothing-store-backend`
 
 #### Step 2: Setup Environment Variables
@@ -42,7 +42,7 @@ With the terminal in the backend directory, run `dotnet restore`
 
 #### Step 7: Run Server (Please use the exact command below)
 `dotnet run --launch-profile "https"`
-This will start the backend server at https://localhost:7276.
+This will start the backend server at https://localhost:7276 and the corresponding swagger at https://localhost:7276/swagger/index.html.
 ### Frontend
 
 #### Step 1: Navigate to frontend directory in Terminal
